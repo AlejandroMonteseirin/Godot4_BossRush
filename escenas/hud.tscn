@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd4tbm3ru4hto"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_sqjt7"]
+[ext_resource type="Texture2D" uid="uid://cr22dfeuve5gl" path="res://assets/hud/hud_heartFull.png" id="2_se7bh"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_sqjt7")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 53.0
+offset_bottom = 45.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Hud" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="1" type="TextureRect" parent="MarginContainer/Hud"]
+z_index = 100
+layout_mode = 2
+texture = ExtResource("2_se7bh")
+
+[node name="2" type="TextureRect" parent="MarginContainer/Hud"]
+z_index = 100
+layout_mode = 2
+texture = ExtResource("2_se7bh")
+
+[node name="3" type="TextureRect" parent="MarginContainer/Hud"]
+z_index = 100
+layout_mode = 2
+texture = ExtResource("2_se7bh")
+
+[node name="Retry" type="AcceptDialog" parent="."]
+title = "You DIED"
+initial_position = 1
+size = Vector2i(180, 135)
+dialog_text = "Retry?"
+dialog_autowrap = true
+
+[connection signal="confirmed" from="Retry" to="." method="_on_accept_dialog_confirmed"]

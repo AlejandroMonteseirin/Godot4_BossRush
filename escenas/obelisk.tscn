@@ -1,0 +1,153 @@
+[gd_scene load_steps=21 format=3 uid="uid://c7b8jbhrusnek"]
+
+[ext_resource type="Script" path="res://scripts/obelisk.gd" id="1_s4jre"]
+[ext_resource type="Texture2D" uid="uid://cgg8jvrth2060" path="res://assets/FlyingObelisk_Simple/FlyingObelisk_no_lightnings_no_letter.png" id="2_pp7vd"]
+[ext_resource type="Texture2D" uid="uid://xa4em87l3syg" path="res://textures/circle_05.png" id="3_a6uts"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tofh"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(0, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdwo0"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(200, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw28s"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(400, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7w6b"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(600, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cetbf"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(800, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7s7q"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(1000, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxnje"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(1200, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nrb7"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(1400, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asset"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(1600, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpv0r"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(1800, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr1yg"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(2000, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfoh6"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(2200, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jghy3"]
+atlas = ExtResource("2_pp7vd")
+region = Rect2(2400, 0, 200, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d5thg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tofh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdwo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lw28s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7w6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cetbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7s7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxnje")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nrb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asset")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpv0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr1yg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfoh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jghy3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o7lny"]
+radius = 34.0
+height = 266.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3f6o8"]
+radius = 38.1182
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g1lcn"]
+polygon = PackedVector2Array(1, 142, 38, 104, 22, -92, 1, -124, -13, -93, -27, 106)
+
+[node name="obelisk" type="RigidBody2D" groups=["obelisk"]]
+position = Vector2(960, 176)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_s4jre")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d5thg")
+autoplay = "default"
+frame_progress = 0.58038
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(4, 6)
+shape = SubResource("CapsuleShape2D_o7lny")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 174)
+shape = SubResource("CircleShape2D_3f6o8")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1, 193)
+color = Color(0, 0, 1, 1)
+energy = 0.0
+shadow_enabled = true
+texture = ExtResource("3_a6uts")
+texture_scale = 2.01
+height = 5.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_g1lcn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

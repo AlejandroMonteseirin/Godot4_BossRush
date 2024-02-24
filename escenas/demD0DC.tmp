@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvrhhyvq8t7tu"]
+
+[ext_resource type="Script" path="res://scripts/demon.gd" id="1_hsyxy"]
+[ext_resource type="SpriteFrames" uid="uid://bjgti5ngavsta" path="res://spriteFrames/demon.tres" id="1_udiq8"]
+[ext_resource type="PackedScene" uid="uid://c72bdr1v0qxrw" path="res://escenas/disparador.tscn" id="2_hytpm"]
+[ext_resource type="Script" path="res://scripts/attackControllerDemon.gd" id="4_ytdbo"]
+[ext_resource type="PackedScene" uid="uid://27td1xarjq6o" path="res://escenas/fire.tscn" id="5_264fb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1emkh"]
+radius = 546.015
+
+[node name="demon" type="Node2D"]
+position = Vector2(925, 315)
+script = ExtResource("1_hsyxy")
+
+[node name="demonio" type="AnimatedSprite2D" parent="."]
+light_mask = 0
+scale = Vector2(1.5, 1.5)
+sprite_frames = ExtResource("1_udiq8")
+animation = &"attack180"
+autoplay = "idle180"
+frame = 19
+frame_progress = 1.0
+speed_scale = 2.0
+
+[node name="disparador" parent="." instance=ExtResource("2_hytpm")]
+position = Vector2(-3, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1emkh")
+
+[node name="areaAtaque" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areaAtaque"]
+shape = SubResource("CircleShape2D_1emkh")
+
+[node name="atackcontroller" type="Node2D" parent="."]
+script = ExtResource("4_ytdbo")
+
+[node name="Node2D" parent="atackcontroller" instance=ExtResource("5_264fb")]
+position = Vector2(-215, 150)
+
+[node name="Node2D2" parent="atackcontroller" instance=ExtResource("5_264fb")]
+position = Vector2(-57, 217)
+
+[node name="Node2D3" parent="atackcontroller" instance=ExtResource("5_264fb")]
+position = Vector2(157, 201)
+
+[node name="Node2D4" parent="atackcontroller" instance=ExtResource("5_264fb")]
+position = Vector2(303, 142)
+
+[connection signal="animation_finished" from="demonio" to="." method="_on_demonio_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="areaAtaque" to="." method="_on_area_ataque_body_entered"]

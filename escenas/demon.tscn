@@ -1,0 +1,130 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvrhhyvq8t7tu"]
+
+[ext_resource type="Script" path="res://scripts/demon.gd" id="1_hsyxy"]
+[ext_resource type="SpriteFrames" uid="uid://bjgti5ngavsta" path="res://spriteFrames/demon.tres" id="1_udiq8"]
+[ext_resource type="PackedScene" uid="uid://c72bdr1v0qxrw" path="res://escenas/disparador.tscn" id="2_hytpm"]
+[ext_resource type="Script" path="res://scripts/attackControllerDemon.gd" id="4_ytdbo"]
+[ext_resource type="PackedScene" uid="uid://27td1xarjq6o" path="res://escenas/fire.tscn" id="5_264fb"]
+[ext_resource type="Texture2D" uid="uid://r630fmakymkl" path="res://textures/star_02.png" id="6_bj8xu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yw3jy"]
+radius = 137.612
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1emkh"]
+radius = 509.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tthj6"]
+radius = 329.002
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b7dhu"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 0.0
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+color = Color(1, 1, 0.0431373, 1)
+
+[node name="demon" type="Node2D"]
+position = Vector2(925, 315)
+script = ExtResource("1_hsyxy")
+
+[node name="demonio" type="AnimatedSprite2D" parent="."]
+light_mask = 0
+scale = Vector2(1.5, 1.5)
+sprite_frames = ExtResource("1_udiq8")
+animation = &"attack180"
+autoplay = "idle180"
+frame = 19
+frame_progress = 1.0
+speed_scale = 2.0
+
+[node name="disparador" parent="." instance=ExtResource("2_hytpm")]
+position = Vector2(-3, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="hitboxDemonio" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitboxDemonio"]
+shape = SubResource("CircleShape2D_yw3jy")
+debug_color = Color(0.0980392, 0.643137, 0.258824, 0.419608)
+
+[node name="areaAtaque" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areaAtaque"]
+shape = SubResource("CircleShape2D_1emkh")
+debug_color = Color(0.831373, 0.384314, 0.2, 0.419608)
+
+[node name="atackcontroller" type="Node2D" parent="."]
+script = ExtResource("4_ytdbo")
+metadata/_edit_lock_ = true
+
+[node name="particles" type="Node2D" parent="atackcontroller"]
+scale = Vector2(1e-05, 1e-05)
+
+[node name="Node2D" parent="atackcontroller/particles" instance=ExtResource("5_264fb")]
+position = Vector2(-328, 0)
+metadata/_edit_lock_ = true
+
+[node name="Node2D2" parent="atackcontroller/particles" instance=ExtResource("5_264fb")]
+position = Vector2(-248, 202)
+metadata/_edit_lock_ = true
+
+[node name="Node2D3" parent="atackcontroller/particles" instance=ExtResource("5_264fb")]
+position = Vector2(0, 324)
+metadata/_edit_lock_ = true
+
+[node name="Node2D4" parent="atackcontroller/particles" instance=ExtResource("5_264fb")]
+position = Vector2(248, 202)
+metadata/_edit_lock_ = true
+
+[node name="Node2D5" parent="atackcontroller/particles" instance=ExtResource("5_264fb")]
+position = Vector2(248, -200)
+metadata/_edit_lock_ = true
+
+[node name="Node2D6" parent="atackcontroller/particles" instance=ExtResource("5_264fb")]
+position = Vector2(328, 0)
+metadata/_edit_lock_ = true
+
+[node name="Node2D8" parent="atackcontroller/particles" instance=ExtResource("5_264fb")]
+position = Vector2(0, -330)
+metadata/_edit_lock_ = true
+
+[node name="Node2D9" parent="atackcontroller/particles" instance=ExtResource("5_264fb")]
+position = Vector2(-248, -200)
+metadata/_edit_lock_ = true
+
+[node name="impenetrable" type="RigidBody2D" parent="atackcontroller"]
+collision_layer = 2
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="colision" type="CollisionShape2D" parent="atackcontroller/impenetrable"]
+scale = Vector2(1e-05, 1e-05)
+shape = SubResource("CircleShape2D_tthj6")
+disabled = true
+debug_color = Color(0.517647, 0, 0.227451, 0.376471)
+
+[node name="mareado" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(0, -75)
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_b7dhu")
+texture = ExtResource("6_bj8xu")
+local_coords = true
+
+[connection signal="animation_finished" from="demonio" to="." method="_on_demonio_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="hitboxDemonio" to="." method="_on_hitbox_demonio_body_entered"]
+[connection signal="body_entered" from="areaAtaque" to="." method="_on_area_ataque_body_entered"]
+[connection signal="body_exited" from="areaAtaque" to="." method="_on_area_ataque_body_exited"]

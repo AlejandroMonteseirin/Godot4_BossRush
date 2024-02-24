@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://oqw0cfc4x713"]
+
+[ext_resource type="Script" path="res://scripts/rayoPlayer.gd" id="1_tjcsn"]
+[ext_resource type="Material" uid="uid://ps0qkylfqqcv" path="res://particles/rayoPlayerParticle.tres" id="2_apt67"]
+[ext_resource type="Texture2D" uid="uid://xa4em87l3syg" path="res://textures/circle_05.png" id="3_2m6de"]
+[ext_resource type="Texture2D" uid="uid://dly4lubu2d4di" path="res://textures/magic_05.png" id="4_3mdx2"]
+[ext_resource type="Texture2D" uid="uid://blnb6x1ec4m3j" path="res://textures/light_01.png" id="4_x24d3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7oy1v"]
+radius = 18.4391
+
+[sub_resource type="Gradient" id="Gradient_eo654"]
+offsets = PackedFloat32Array(0, 0.763547, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 0.929412, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8idah"]
+gradient = SubResource("Gradient_eo654")
+
+[sub_resource type="Curve" id="Curve_whe7w"]
+_data = [Vector2(0, 0.644128), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fflhl"]
+curve = SubResource("Curve_whe7w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7cfu7"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_fflhl")
+color_ramp = SubResource("GradientTexture1D_8idah")
+
+[node name="rayo" type="RigidBody2D" groups=["proyectil"]]
+z_index = 1
+mass = 0.1
+script = ExtResource("1_tjcsn")
+
+[node name="haz" type="GPUParticles2D" parent="."]
+amount = 4
+process_material = ExtResource("2_apt67")
+texture = ExtResource("4_x24d3")
+lifetime = 0.3
+
+[node name="bolaRoja" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_3mdx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7oy1v")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 1, 0.392157, 1)
+energy = 2.5
+shadow_enabled = true
+texture = ExtResource("3_2m6de")
+texture_scale = 4.0
+height = 15.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="explota" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_7cfu7")
+texture = ExtResource("4_x24d3")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

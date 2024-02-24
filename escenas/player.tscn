@@ -1,0 +1,208 @@
+[gd_scene load_steps=26 format=3 uid="uid://cnfkadmjsg2ak"]
+
+[ext_resource type="Script" path="res://escenas/player.gd" id="1_g7y2q"]
+[ext_resource type="SpriteFrames" uid="uid://ccshwf7x86jy4" path="res://animation/player.tres" id="2_hit01"]
+[ext_resource type="Texture2D" uid="uid://br6ex87vbr8rp" path="res://particles/blanco_gris.tres" id="3_211l7"]
+[ext_resource type="Texture2D" uid="uid://dcaepsvitxwlf" path="res://textures/smoke_01.png" id="4_splcf"]
+[ext_resource type="Texture2D" uid="uid://biynxfdtpfho5" path="res://particles/rojo_amarillo.tres" id="5_4pk7j"]
+[ext_resource type="Texture2D" uid="uid://cjdl3w0l7jhvp" path="res://textures/smoke_05.png" id="6_8inpl"]
+[ext_resource type="Texture2D" uid="uid://djr6b8fie3aqm" path="res://textures/star_04.png" id="7_cq7jk"]
+[ext_resource type="Texture2D" uid="uid://blnb6x1ec4m3j" path="res://textures/light_01.png" id="8_cf62p"]
+[ext_resource type="Texture2D" uid="uid://dm2vyae13jnno" path="res://textures/scorch_01.png" id="9_p7t7t"]
+[ext_resource type="Texture2D" uid="uid://xa4em87l3syg" path="res://textures/circle_05.png" id="9_uhyn6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yoa3g"]
+radius = 34.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g1dj4"]
+polygon = PackedVector2Array(23, 39, 2, 51, -19, 41, -26, 23, -18, 4, 2, -2, 19, 7, 28, 21)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ywfx5"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 30.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_max = 30.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+color_ramp = ExtResource("3_211l7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8i65d"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 30.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 100.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.5
+color_ramp = ExtResource("5_4pk7j")
+
+[sub_resource type="Gradient" id="Gradient_rve7y"]
+offsets = PackedFloat32Array(0, 0.812808, 0.990148)
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ms34q"]
+gradient = SubResource("Gradient_rve7y")
+
+[sub_resource type="Curve" id="Curve_v1fi4"]
+_data = [Vector2(0, 0.188612), 0.0, 0.0, 0, 0, Vector2(0.781377, 0.074733), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0i1dr"]
+curve = SubResource("Curve_v1fi4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0i35r"]
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 90.0
+initial_velocity_min = 1500.0
+initial_velocity_max = 1500.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_0i1dr")
+color_ramp = SubResource("GradientTexture1D_ms34q")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_52ep4"]
+radius = 400.0
+
+[sub_resource type="Gradient" id="Gradient_6ppe5"]
+offsets = PackedFloat32Array(0, 0.763547, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 0.929412, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qmwqb"]
+gradient = SubResource("Gradient_6ppe5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jt0nh"]
+particle_flag_disable_z = true
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angular_velocity_min = 100.0
+angular_velocity_max = 100.0
+orbit_velocity_min = -2.0
+orbit_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.1
+color_ramp = SubResource("GradientTexture1D_qmwqb")
+
+[sub_resource type="Animation" id="Animation_n1s0h"]
+resource_name = "hit"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 0.108819),
+"update": 0,
+"values": [Color(5, 5, 5, 1), Color(1, 1, 1, 1), Color(5, 5, 5, 1), Color(1, 1, 1, 1), Color(5, 5, 5, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_de2yx"]
+_data = {
+"hit": SubResource("Animation_n1s0h")
+}
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_g7y2q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yoa3g")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+position = Vector2(-2, -25)
+occluder = SubResource("OccluderPolygon2D_g1dj4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, -34)
+sprite_frames = ExtResource("2_hit01")
+animation = &"attack0"
+autoplay = "idle180"
+frame = 18
+frame_progress = 0.755606
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(4, 26)
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_ywfx5")
+texture = ExtResource("4_splcf")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(4, 26)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_8i65d")
+texture = ExtResource("6_8inpl")
+
+[node name="ataqueHitbox" type="GPUParticles2D" parent="."]
+scale = Vector2(0.2, 0.2)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_0i35r")
+texture = ExtResource("7_cq7jk")
+lifetime = 0.25
+one_shot = true
+explosiveness = 0.8
+
+[node name="Area2D" type="Area2D" parent="ataqueHitbox"]
+visible = false
+position = Vector2(-0.000244141, 0)
+collision_layer = 3
+collision_mask = 3
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ataqueHitbox/Area2D"]
+position = Vector2(0.000244141, 5)
+shape = SubResource("CircleShape2D_52ep4")
+debug_color = Color(0.972549, 0, 0.439216, 0.419608)
+
+[node name="PointLight2D" type="PointLight2D" parent="ataqueHitbox/Area2D"]
+position = Vector2(5.00024, -50)
+color = Color(1, 0.52549, 0, 1)
+energy = 3.7
+texture = ExtResource("9_p7t7t")
+texture_scale = 2.0
+height = 5.0
+
+[node name="rayo" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_jt0nh")
+texture = ExtResource("8_cf62p")
+
+[node name="PointLight2D" type="PointLight2D" parent="rayo"]
+visible = false
+color = Color(1, 1, 0.392157, 1)
+energy = 2.5
+shadow_enabled = true
+texture = ExtResource("9_uhyn6")
+texture_scale = 4.0
+height = 15.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_de2yx")
+}
+
+[connection signal="body_entered" from="ataqueHitbox/Area2D" to="." method="_on_area_2d_body_entered"]

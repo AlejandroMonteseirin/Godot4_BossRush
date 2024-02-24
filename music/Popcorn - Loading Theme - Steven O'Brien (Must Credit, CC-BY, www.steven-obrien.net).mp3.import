@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://6d6036fr7n3d"
+path="res://.godot/imported/Popcorn - Loading Theme - Steven O'Brien (Must Credit, CC-BY, www.steven-obrien.net).mp3-e9f0036537f4c283220043e3470f5da2.mp3str"
+
+[deps]
+
+source_file="res://music/Popcorn - Loading Theme - Steven O'Brien (Must Credit, CC-BY, www.steven-obrien.net).mp3"
+dest_files=["res://.godot/imported/Popcorn - Loading Theme - Steven O'Brien (Must Credit, CC-BY, www.steven-obrien.net).mp3-e9f0036537f4c283220043e3470f5da2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

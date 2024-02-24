@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://tul0d4cjmaib"
+path="res://.godot/imported/Popcorn - Main Loop - Steven O'Brien (Must Credit, CC-BY, www.steven-obrien.net).mp3-f1a63401aea3238ec40b5890af4de26d.mp3str"
+
+[deps]
+
+source_file="res://music/Popcorn - Main Loop - Steven O'Brien (Must Credit, CC-BY, www.steven-obrien.net).mp3"
+dest_files=["res://.godot/imported/Popcorn - Main Loop - Steven O'Brien (Must Credit, CC-BY, www.steven-obrien.net).mp3-f1a63401aea3238ec40b5890af4de26d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
