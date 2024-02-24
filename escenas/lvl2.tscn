@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://b30jyt3oshann"]
+
+[ext_resource type="Script" path="res://scripts/lvl1.gd" id="1_r5xt6"]
+[ext_resource type="Texture2D" uid="uid://fluh1gj34mb4" path="res://assets/lava/Lava_005_COLOR.jpg" id="2_58js7"]
+[ext_resource type="Texture2D" uid="uid://bogtd1t14olir" path="res://assets/lava/Lava_005_NORM.jpg" id="3_q6cws"]
+[ext_resource type="Texture2D" uid="uid://0cvkcilt0gip" path="res://assets/lava/Lava_005_DISP.png" id="4_0agr5"]
+[ext_resource type="Texture2D" uid="uid://d2oqg3mn8gumf" path="res://assets/lava/Lava_004_COLOR.jpg" id="5_4iddt"]
+[ext_resource type="Texture2D" uid="uid://ceurdsb5bjweg" path="res://assets/TexturesCom_Wall_Stone3_2x2_1K_albedo.png" id="6_lunu3"]
+[ext_resource type="Texture2D" uid="uid://dq62iy2b5mclk" path="res://assets/TexturesCom_Wall_Stone3_2x2_1K_normal.png" id="7_lc70b"]
+[ext_resource type="PackedScene" uid="uid://cvrhhyvq8t7tu" path="res://escenas/demon.tscn" id="8_mu2bq"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_l17i7"]
+diffuse_texture = ExtResource("2_58js7")
+normal_texture = ExtResource("3_q6cws")
+specular_texture = ExtResource("4_0agr5")
+specular_shininess = 0.25
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gsvbv"]
+diffuse_texture = ExtResource("5_4iddt")
+texture_repeat = 3
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7wdvh"]
+diffuse_texture = ExtResource("6_lunu3")
+normal_texture = ExtResource("7_lc70b")
+
+[node name="lvl" type="Node2D"]
+script = ExtResource("1_r5xt6")
+
+[node name="map1" type="Node" parent="."]
+
+[node name="lavaExt" type="TextureRect" parent="map1"]
+z_index = -2
+offset_left = -5000.0
+offset_top = -5000.0
+offset_right = 15000.0
+offset_bottom = 15000.0
+scale = Vector2(0.6, 0.6)
+texture = SubResource("CanvasTexture_l17i7")
+stretch_mode = 1
+
+[node name="bordeSombra" type="Polygon2D" parent="map1"]
+modulate = Color(0.454902, 0.454902, 0.454902, 1)
+z_index = -2
+position = Vector2(-932.936, 0)
+scale = Vector2(1.44681, 1)
+texture = SubResource("CanvasTexture_gsvbv")
+texture_scale = Vector2(5, 5)
+polygon = PackedVector2Array(2070.03, 2025, 1996.07, 1943, 2001.6, 50, 2065.88, 164)
+
+[node name="bordeInferior" type="Polygon2D" parent="map1"]
+z_index = -2
+position = Vector2(-1.021, 221.25)
+scale = Vector2(1.0005, 0.886364)
+texture = SubResource("CanvasTexture_gsvbv")
+texture_scale = Vector2(5, 5)
+polygon = PackedVector2Array(2062, 2035, 150.946, 2037.26, 40.0012, 1950.38, 1963.05, 1950.38)
+uv = PackedVector2Array(2062, 2035, 85.979, 2033, 43.999, 1948, 1964, 1948)
+
+[node name="Suelo" type="TextureRect" parent="map1"]
+z_index = -2
+offset_left = 39.0
+offset_top = 50.0
+offset_right = 9659.0
+offset_bottom = 9550.0
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CanvasTexture_7wdvh")
+stretch_mode = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="map1"]
+visible = false
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map1/StaticBody2D"]
+polygon = PackedVector2Array(42, 46, 1962, 54, 1966, 1953, 2066, 2033, 2052, -18, 32, -28)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="map1/StaticBody2D"]
+polygon = PackedVector2Array(42, 46, 42, 1948, 1966, 1953, 2066, 2033, -20, 2031, 32, -28)
+
+[node name="demon" parent="." instance=ExtResource("8_mu2bq")]
+position = Vector2(968, 475)

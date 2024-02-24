@@ -7,6 +7,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	ataque() 
 	pass # Replace with function body.
 
 
@@ -24,7 +25,6 @@ func dispara():
 
 
 func _on_timer_timeout():
-	if(not atacando):
 		dispara() # Replace with function body.
 
 
@@ -34,18 +34,11 @@ func _on_demonio_animation_finished():
 	$demonio.play("idle180")
 	$Timer.start()
 
-func _on_area_ataque_body_entered(body):
-	if "jugador" in body:
-		ataque() 
-		
-func _on_area_ataque_body_exited(body):
-	atacando=false
-	$atackcontroller.dejaAtacar() 
+
+
 	
-var atacando=false
+
 func ataque():
-	if(not atacando):
-		atacando=true
 		$atackcontroller.ataca()
 		$demonio.play("attack180")
 	

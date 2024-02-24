@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ckown3jcexjo"]
+[gd_scene load_steps=14 format=3 uid="uid://ckown3jcexjo"]
 
 [ext_resource type="Texture2D" uid="uid://ceurdsb5bjweg" path="res://assets/TexturesCom_Wall_Stone3_2x2_1K_albedo.png" id="1_md2uh"]
 [ext_resource type="Script" path="res://scripts/lvl1.gd" id="1_rsdyr"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://scripts/pentagrama.gd" id="8_jt3mo"]
 [ext_resource type="PackedScene" uid="uid://c7b8jbhrusnek" path="res://escenas/obelisk.tscn" id="10_u2n7x"]
 [ext_resource type="Texture2D" uid="uid://rxjftkj8yg8i" path="res://textures/magic_01.png" id="12_5ru4b"]
-[ext_resource type="PackedScene" uid="uid://cd4tbm3ru4hto" path="res://escenas/hud.tscn" id="12_wjh01"]
 [ext_resource type="Texture2D" uid="uid://fluh1gj34mb4" path="res://assets/lava/Lava_005_COLOR.jpg" id="13_av26q"]
 [ext_resource type="Texture2D" uid="uid://bogtd1t14olir" path="res://assets/lava/Lava_005_NORM.jpg" id="14_e0wqu"]
 [ext_resource type="Texture2D" uid="uid://0cvkcilt0gip" path="res://assets/lava/Lava_005_DISP.png" id="15_00o1j"]
@@ -101,5 +100,3 @@ position = Vector2(1322, 1291)
 
 [node name="obelisk5" parent="map1" instance=ExtResource("10_u2n7x")]
 position = Vector2(1543, 601)
-
-[node name="HUD" parent="." instance=ExtResource("12_wjh01")]

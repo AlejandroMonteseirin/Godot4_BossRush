@@ -134,10 +134,9 @@ occluder = SubResource("OccluderPolygon2D_g1dj4")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(4, -34)
 sprite_frames = ExtResource("2_hit01")
-animation = &"attack0"
+animation = &"attack90"
 autoplay = "idle180"
-frame = 18
-frame_progress = 0.755606
+frame_progress = 0.309506
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1

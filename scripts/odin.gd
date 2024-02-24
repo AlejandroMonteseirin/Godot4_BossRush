@@ -1,13 +1,13 @@
 extends Node2D
 
 @export var nivel0:PackedScene
-
-
+@export var nivel1:PackedScene
+@export var nivel2:PackedScene
 
 var nivelActual
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	inicializarNivel(nivel0)
+	inicializarNivel(nivel2)
 	nivelActual=nivel0
 
 func reiniciarNivel():
