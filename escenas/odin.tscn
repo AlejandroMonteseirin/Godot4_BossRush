@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bgpb1tnrsyupx" path="res://escenas/lvl0.tscn" id="2_f505a"]
 [ext_resource type="PackedScene" uid="uid://cd4tbm3ru4hto" path="res://escenas/hud.tscn" id="2_umrdv"]
 [ext_resource type="PackedScene" uid="uid://b30jyt3oshann" path="res://escenas/lvl2.tscn" id="3_xjc10"]
-[ext_resource type="Script" path="res://scripts/Camera.gd" id="4_ssruu"]
+[ext_resource type="PackedScene" uid="uid://ddown2ntyvunt" path="res://escenas/camera_2d.tscn" id="5_10wid"]
 
 [node name="odin" type="Node2D"]
 script = ExtResource("1_8fnuo")
@@ -14,12 +14,8 @@ nivel2 = ExtResource("3_xjc10")
 
 [node name="player" parent="." instance=ExtResource("1_pjaxr")]
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Camera2D" parent="player" instance=ExtResource("5_10wid")]
 unique_name_in_owner = true
-zoom = Vector2(0.5, 0.5)
-position_smoothing_enabled = true
-position_smoothing_speed = 11.0
-script = ExtResource("4_ssruu")
 
 [node name="HUD" parent="." instance=ExtResource("2_umrdv")]
 

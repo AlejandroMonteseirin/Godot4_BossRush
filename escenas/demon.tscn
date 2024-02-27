@@ -39,10 +39,8 @@ script = ExtResource("1_hsyxy")
 light_mask = 0
 scale = Vector2(1.5, 1.5)
 sprite_frames = ExtResource("1_udiq8")
-animation = &"attack180"
+animation = &"attack000"
 autoplay = "idle180"
-frame = 19
-frame_progress = 1.0
 speed_scale = 2.0
 
 [node name="disparador" parent="." instance=ExtResource("2_hytpm")]

@@ -7,7 +7,7 @@ extends Node2D
 var nivelActual
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	inicializarNivel(nivel2)
+	inicializarNivel(nivel0)
 	nivelActual=nivel0
 
 func reiniciarNivel():

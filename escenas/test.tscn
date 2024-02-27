@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1wfh8gtko8wu"]
+
+[ext_resource type="PackedScene" uid="uid://cnfkadmjsg2ak" path="res://escenas/player.tscn" id="1_qs366"]
+[ext_resource type="PackedScene" uid="uid://ddown2ntyvunt" path="res://escenas/camera_2d.tscn" id="2_gxc0a"]
+[ext_resource type="PackedScene" uid="uid://27td1xarjq6o" path="res://escenas/fire.tscn" id="2_h2yoq"]
+[ext_resource type="Texture2D" uid="uid://ceurdsb5bjweg" path="res://assets/TexturesCom_Wall_Stone3_2x2_1K_albedo.png" id="4_7t0d0"]
+[ext_resource type="PackedScene" uid="uid://c5o10l8cqwjnf" path="res://environment.tscn" id="5_t6y6m"]
+[ext_resource type="Environment" uid="uid://ctqexgfbch8ut" path="res://Xenvironment.tres" id="6_rle2y"]
+
+[node name="Test" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_qs366")]
+
+[node name="Camera2D" parent="player" instance=ExtResource("2_gxc0a")]
+
+[node name="Node2D" parent="." instance=ExtResource("2_h2yoq")]
+position = Vector2(340, 0)
+status = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(893, -63)
+texture = ExtResource("4_7t0d0")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(3, 1, 1, 1)
+z_index = -1
+position = Vector2(273, -484)
+scale = Vector2(0.519531, 0.428711)
+texture = ExtResource("4_7t0d0")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+z_index = -1
+position = Vector2(1289, -127)
+scale = Vector2(0.519531, 0.428711)
+texture = ExtResource("4_7t0d0")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("5_t6y6m")]
+environment = ExtResource("6_rle2y")
