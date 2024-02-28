@@ -19,7 +19,6 @@ func _on_timer_timeout():
 
 
 func _on_body_entered(body):
-	print("cerrando")
 	Global.shake_camera(3,80)
 	Input.start_joy_vibration(0,0.2,0.0,3)
 	moverSuelo=true

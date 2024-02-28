@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 Global="*res://scripts/global.gd"
 GlobalWorldEnvironment="*res://world_environment.tscn"
+Audio="*res://music/audio.tscn"
 
 [display]
 

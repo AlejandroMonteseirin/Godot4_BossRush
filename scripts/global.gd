@@ -31,8 +31,8 @@ func freeze_engine(slow=0.1,time=0.2):
 
 ###MENU
 
-var play_sfx = true
-var play_music = true
+var effectVolume = 50
+var musicVolume = 50
 var fullscreen = false
 const SCENE_MAIN_MENU = "res://menu/main_menu/main_menu.tscn"
 
@@ -50,16 +50,17 @@ func load_settings():
 
 	if load_res != OK:
 		print("failed to load settings")
+		defaultSettings()
 		return
 
-	for setting_key in config.get_section_keys(CONFIG_SETTINGS_SECTION):
+	for setting_key in ['fullscreen','musicVolume','effectVolume']:
 		set_setting(setting_key, config.get_value(CONFIG_SETTINGS_SECTION, setting_key), false)
 
 ## persist all settings to disk
 ## add a new setting in the array to ensure it persists
 func save_settings():
 	var config = ConfigFile.new()
-	for setting in ["fullscreen", "play_sfx", "play_music"]:
+	for setting in ["fullscreen", "effectVolume", "musicVolume"]:
 		config.set_value(CONFIG_SETTINGS_SECTION, setting, self[setting])
 	config.save(SETTINGS_FILE)
 
@@ -75,15 +76,23 @@ func set_fullscreen(val:bool):
 ## Defaults to saving all settings after one gets set, but can be disabled
 ## with the `save` argument.
 func set_setting(setting, val, save := true):
+	print(setting,val)
 	self[setting] = val
 	if setting == "fullscreen":
 		set_fullscreen(val)
-
+	if setting == "musicVolume":
+		Audio.volume_db=(musicVolume / 100) * 80 - 40
 	if save:
 		save_settings()
 
 
 func musica(track):
-	if(play_music):
+	if(musicVolume>0):
 		get_node("/root/odin").musica(track)
+
 	
+	
+func defaultSettings():
+	set_setting('musicVolume', 50)
+	set_setting('effectVolume', 50)
+	set_setting('fullscreen', false)

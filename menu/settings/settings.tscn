@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://menu/settings/SettingsControls.gd" id="1_mmaky"]
 [ext_resource type="Script" path="res://menu/settings/FullscreenToggle.gd" id="2_5l5tc"]
-[ext_resource type="Script" path="res://menu/settings/SfxToggle.gd" id="3_n6nlb"]
-[ext_resource type="Script" path="res://menu/settings/MusicToggle.gd" id="4_s1svy"]
+[ext_resource type="Script" path="res://menu/settings/volumeMusic.gd" id="4_kb0v1"]
+[ext_resource type="Script" path="res://menu/volumeEffects.gd" id="4_oyw51"]
 [ext_resource type="Script" path="res://menu/settings/BackButton.gd" id="5_x47bl"]
 
 [node name="Settings" type="Control"]
@@ -73,15 +73,23 @@ layout_mode = 2
 text = "Fullscreen"
 script = ExtResource("2_5l5tc")
 
-[node name="SfxToggle" type="CheckButton" parent="SettingsControls"]
+[node name="MusicLabel" type="Label" parent="SettingsControls"]
 layout_mode = 2
-text = "Sound Effects"
-script = ExtResource("3_n6nlb")
+text = "Music Volume"
 
-[node name="MusicToggle" type="CheckButton" parent="SettingsControls"]
+[node name="Music" type="HSlider" parent="SettingsControls"]
 layout_mode = 2
-text = "Music"
-script = ExtResource("4_s1svy")
+tooltip_text = "Music volume"
+script = ExtResource("4_kb0v1")
+
+[node name="Effects volume" type="Label" parent="SettingsControls"]
+layout_mode = 2
+text = "Effects Volume"
+
+[node name="effects" type="HSlider" parent="SettingsControls"]
+layout_mode = 2
+tooltip_text = "Music volume"
+script = ExtResource("4_oyw51")
 
 [node name="BackButton" type="Button" parent="SettingsControls"]
 layout_mode = 2
@@ -89,6 +97,6 @@ text = "Back"
 script = ExtResource("5_x47bl")
 
 [connection signal="toggled" from="SettingsControls/FullscreenToggle" to="SettingsControls/FullscreenToggle" method="_on_toggled"]
-[connection signal="toggled" from="SettingsControls/SfxToggle" to="SettingsControls/SfxToggle" method="_on_toggled"]
-[connection signal="toggled" from="SettingsControls/MusicToggle" to="SettingsControls/MusicToggle" method="_on_toggled"]
+[connection signal="drag_ended" from="SettingsControls/Music" to="SettingsControls/Music" method="_on_drag_ended"]
+[connection signal="drag_ended" from="SettingsControls/effects" to="SettingsControls/effects" method="_on_drag_ended"]
 [connection signal="pressed" from="SettingsControls/BackButton" to="SettingsControls/BackButton" method="_on_pressed"]

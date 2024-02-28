@@ -13,7 +13,7 @@ var estado=State.IDLE
 var tween 
 
 var iniciadoCombate=false
-var vidas=1
+var vidas=6
 var hijo:bool=false
 var bebe:bool=false
 var explosion : PackedScene= preload("res://escenas/explosion.tscn")

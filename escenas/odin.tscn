@@ -18,5 +18,3 @@ nivel2 = ExtResource("3_xjc10")
 unique_name_in_owner = true
 
 [node name="HUD" parent="." instance=ExtResource("2_umrdv")]
-
-[node name="audio" type="AudioStreamPlayer" parent="."]

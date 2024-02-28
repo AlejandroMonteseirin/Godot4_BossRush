@@ -5,3 +5,4 @@ func _ready():
 		if child.visible:
 			child.grab_focus()
 			return
+
