@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://ctofuok02jsxp"]
+[gd_scene load_steps=2 format=3 uid="uid://ctofuok02jsxp"]
+
+[ext_resource type="Script" path="res://music/audio.gd" id="1_jcokf"]
 
 [node name="audio" type="AudioStreamPlayer"]
+script = ExtResource("1_jcokf")

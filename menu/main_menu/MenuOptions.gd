@@ -10,9 +10,11 @@ func _ready():
 		$Quit.hide()
 
 func _on_quit_pressed():
+	Audio.play_sound(preload("res://audio/interface/select_005.ogg"))
 	get_tree().quit()
 
 func _on_settings_pressed():
+	Audio.play_sound(preload("res://audio/interface/select_005.ogg"))
 	get_tree().change_scene_to_packed(settings_scene)
 
 func _on_start_pressed():

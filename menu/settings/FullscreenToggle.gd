@@ -7,4 +7,5 @@ func _ready():
 		hide()
 
 func _on_toggled(bpressed):
+	Audio.play_sound(preload("res://audio/interface/select_005.ogg"))
 	Global.set_setting("fullscreen", bpressed)
