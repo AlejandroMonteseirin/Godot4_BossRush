@@ -1370,11 +1370,9 @@ script = ExtResource("27_y8wgp")
 position = Vector2(-1404, -1433)
 shape = SubResource("RectangleShape2D_ef6mx")
 
-[node name="inicio" type="PointLight2D" parent="map"]
+[node name="inicio" type="Sprite2D" parent="map"]
 position = Vector2(0, 200)
-color = Color(0, 1, 3, 1)
 texture = ExtResource("27_y6t8x")
-script = ExtResource("22_ysxpr")
 
 [node name="slime" parent="." instance=ExtResource("18_6f0cf")]
 position = Vector2(-1442, -3764)

@@ -32,7 +32,7 @@ func freeze_engine(slow=0.1,time=0.2):
 ###MENU
 
 var effectVolume = 50
-var musicVolume = 50
+var musicVolume = 30
 var fullscreen = false
 const SCENE_MAIN_MENU = "res://menu/main_menu/main_menu.tscn"
 

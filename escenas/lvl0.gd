@@ -1,15 +1,15 @@
 extends Node
 
 var infoNivel = {"camara":"jugador",
-	"posicion": [0,300]}
+	"posicion": [0,200]}
 
-
+var efecto = preload("res://escenas/efectoEnergiaOneShot.tscn")
 @export var nivel1:PackedScene
 
-@export var efecto:PackedScene
+
 func _ready():
 	Global.tempValue=0
-	self.add_child(efecto.instantiate())
+	$map/inicio.add_child(efecto.instantiate())
 
 
 func _on_timer_timeout():
