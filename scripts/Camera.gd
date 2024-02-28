@@ -28,11 +28,12 @@ func _process(delta):
 		# Agitar la cámara mientras el temporizador esté activo
 		offset = Vector2(randf(), randf()) * shake_intensity
 		shake_timer -= delta
-		print("shaking")
+
 		
 	if (offset.x!=0 or offset.y!=0) and shake_timer<=0:
-		lerp(offset.x,0.0,delta*3)
-		lerp(offset.y,0.0,delta*3)
+		offset.x = move_toward(offset.x, 0.0, 0.1 * delta)
+		offset.y = move_toward(offset.y, 0.0, 0.1 * delta)
+
 
 	
 	if zoomInProperty:
@@ -42,8 +43,8 @@ func _process(delta):
 			zoomInProperty=false
 			
 	if zoomResetProperty:
-		lerp(zoom.x,0.5,delta*3)
-		lerp(zoom.y,0.5,delta*3)
+		zoom.x = move_toward(zoom.x, 0.5, 0.1 * delta)
+		zoom.y = move_toward(zoom.y, 0.5, 0.1 * delta)
 		if zoom.x==0.5 and zoom.y==0.5:
 			zoomResetProperty=false
 			

@@ -13,16 +13,20 @@ var estado=State.IDLE
 var tween 
 
 var iniciadoCombate=false
-var vidas=5
+var vidas=1
 var hijo:bool=false
 var bebe:bool=false
 var explosion : PackedScene= preload("res://escenas/explosion.tscn")
+
+var trail0_2= preload("res://scripts/trailCurves/0_2.tres")
+var trail0_4= preload("res://scripts/trailCurves/0_4.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if bebe:
+		$Line2D.width_curve=trail0_2
 		$Timer.start()
-		$GPUParticles2D.hide()
 	elif hijo:
+		$Line2D.width_curve=trail0_4
 		slime = load("res://escenas/slime.tscn")
 		$Timer.start()
 	else:
@@ -34,9 +38,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(self.velocity.length_squared()<=0.1):
-		$GPUParticles2D.emitting=false
+		$Line2D.estadoTrail(false)
 	else:
-		$GPUParticles2D.emitting=true
+		$Line2D.estadoTrail(true)
 	match estado:
 		State.DAMAGED:
 			var collision = move_and_collide(self.velocity * delta)
@@ -89,7 +93,7 @@ func atacado(_damage):
 func destruir():
 	self.add_child(explosion.instantiate())
 	$AnimatedSprite2D.hide()
-	$GPUParticles2D.hide()
+	$Line2D.hide()
 	$CollisionShape2D.disabled=true
 	await get_tree().create_timer(2.0).timeout
 	Global.tempValue=Global.tempValue+1

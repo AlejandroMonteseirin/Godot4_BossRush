@@ -1,7 +1,7 @@
 extends Node
 
 var infoNivel = {"camara":"jugador",
-	"posicion": [0,0]}
+	"posicion": [0,300]}
 
 
 @export var nivel1:PackedScene

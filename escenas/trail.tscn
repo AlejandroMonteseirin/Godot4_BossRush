@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://uomlvjmtdg6q"]
+
+[ext_resource type="Script" path="res://scripts/lime_trail.gd" id="1_nwnw2"]
+
+[node name="Line2D" type="Line2D"]
+top_level = true
+default_color = Color(0.5, 1.5, 0.5, 1)
+script = ExtResource("1_nwnw2")
+MAX_LENGTH = 30

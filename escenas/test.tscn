@@ -1,17 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1wfh8gtko8wu"]
+[gd_scene load_steps=9 format=3 uid="uid://d1wfh8gtko8wu"]
 
 [ext_resource type="PackedScene" uid="uid://cnfkadmjsg2ak" path="res://escenas/player.tscn" id="1_qs366"]
 [ext_resource type="PackedScene" uid="uid://ddown2ntyvunt" path="res://escenas/camera_2d.tscn" id="2_gxc0a"]
 [ext_resource type="PackedScene" uid="uid://27td1xarjq6o" path="res://escenas/fire.tscn" id="2_h2yoq"]
+[ext_resource type="PackedScene" uid="uid://uomlvjmtdg6q" path="res://escenas/trail.tscn" id="3_ufs0e"]
 [ext_resource type="Texture2D" uid="uid://ceurdsb5bjweg" path="res://assets/TexturesCom_Wall_Stone3_2x2_1K_albedo.png" id="4_7t0d0"]
 [ext_resource type="PackedScene" uid="uid://c5o10l8cqwjnf" path="res://environment.tscn" id="5_t6y6m"]
 [ext_resource type="Environment" uid="uid://ctqexgfbch8ut" path="res://Xenvironment.tres" id="6_rle2y"]
+
+[sub_resource type="Curve" id="Curve_wblim"]
+max_value = 10.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 10), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Test" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("1_qs366")]
 
 [node name="Camera2D" parent="player" instance=ExtResource("2_gxc0a")]
+
+[node name="Line2D" parent="player" instance=ExtResource("3_ufs0e")]
+z_index = -1
+width_curve = SubResource("Curve_wblim")
+default_color = Color(0.501961, 1.50196, 0.501961, 0.52549)
 
 [node name="Node2D" parent="." instance=ExtResource("2_h2yoq")]
 position = Vector2(340, 0)

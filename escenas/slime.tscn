@@ -1,26 +1,11 @@
-[gd_scene load_steps=44 format=3 uid="uid://c61tklouvp0t"]
+[gd_scene load_steps=42 format=3 uid="uid://c61tklouvp0t"]
 
 [ext_resource type="Texture2D" uid="uid://bhr4v0vxgotfd" path="res://assets/Slime Enemy/Idle/Sprite Sheet - Green Idle.png" id="1_5mbs5"]
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_14o2a"]
-[ext_resource type="Texture2D" uid="uid://deuwwse8vgvn4" path="res://textures/dirt_02.png" id="2_4wp3v"]
 [ext_resource type="Texture2D" uid="uid://dm1sy458c47m3" path="res://assets/Slime Enemy/Hurt/Sprite Sheet - Green Hurt.png" id="2_ycua4"]
 [ext_resource type="Texture2D" uid="uid://xa4em87l3syg" path="res://textures/circle_05.png" id="5_fmjni"]
-
-[sub_resource type="Gradient" id="Gradient_whijo"]
-offsets = PackedFloat32Array(0, 0.640741, 1)
-colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_kvpgd"]
-gradient = SubResource("Gradient_whijo")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hagyj"]
-particle_flag_disable_z = true
-angle_min = -180.0
-angle_max = 180.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.3
-scale_max = 0.5
-color_ramp = SubResource("GradientTexture1D_kvpgd")
+[ext_resource type="PackedScene" uid="uid://uomlvjmtdg6q" path="res://escenas/trail.tscn" id="5_k432s"]
+[ext_resource type="Curve" uid="uid://c7bo64aiwf28p" path="res://scripts/trailCurves/0_8.tres" id="6_hyfo8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ah3gu"]
 atlas = ExtResource("2_ycua4")
@@ -309,14 +294,6 @@ _data = {
 scale = Vector2(7, 7)
 script = ExtResource("1_14o2a")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-z_index = -1
-position = Vector2(0, 7)
-process_material = SubResource("ParticleProcessMaterial_hagyj")
-texture = ExtResource("2_4wp3v")
-randomness = 0.8
-visibility_rect = Rect2(-1000, -1000, 2000, 2000)
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_fynq4")
@@ -344,6 +321,11 @@ explosiveness = 0.8
 libraries = {
 "": SubResource("AnimationLibrary_aut3g")
 }
+
+[node name="Line2D" parent="." instance=ExtResource("5_k432s")]
+z_index = -1
+width_curve = ExtResource("6_hyfo8")
+default_color = Color(0.5, 1.5, 0.5, 0.654)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
