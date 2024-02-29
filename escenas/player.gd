@@ -56,6 +56,7 @@ func cambiarEstado(nuevoEstado):
 			
 	match nuevoEstado:
 		State.STATE_HIT:
+			Audio.play_sound(preload("res://audio/impacts/impactPlate_heavy_003.ogg"))
 			cooldownHit=0.6
 			Input.start_joy_vibration(0,0.4,0.1,0.6)
 			$AnimationPlayer.play("hit")
@@ -106,6 +107,7 @@ func _physics_process(delta):
 		State.STATE_ATTACK:
 			contadorAtaque=contadorAtaque+1*delta
 			if(contadorAtaque>0.35 and hitboxAtaque==false ):
+				sonidoAtaque()
 				$ataqueHitbox.position=Vector2(100,0).rotated(deg_to_rad(diccionarioAngulos[ultimoAngulo]))
 				$ataqueHitbox.rotation=deg_to_rad(ultimoAngulo+225)
 				$ataqueHitbox/Area2D.show()
@@ -272,3 +274,14 @@ func reiniciar():
 	self.z_index=0
 	Global.vidas=3
 	Global.modificarVidas(0)
+	
+var audioAtaques = [preload("res://audio/impacts/impactMining_000.ogg"),
+preload("res://audio/impacts/impactMining_001.ogg"),
+preload("res://audio/impacts/impactMining_002.ogg"),
+preload("res://audio/impacts/impactMining_003.ogg"),
+preload("res://audio/impacts/impactMining_004.ogg")]
+
+func sonidoAtaque():
+	var indice_aleatorio = randi() % audioAtaques.size()
+	Audio.play_sound(audioAtaques[indice_aleatorio])
+	

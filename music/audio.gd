@@ -8,8 +8,12 @@ func play_sound(stream: AudioStream):
 	instance.finished.connect(remove_node.bind(instance))
 	add_child(instance)
 	instance.play()
+	return instance
 	
 	
 	
 func remove_node (instance: AudioStreamPlayer):
 	instance.queue_free()
+
+func stop_sound(instance):
+	remove_child(instance)

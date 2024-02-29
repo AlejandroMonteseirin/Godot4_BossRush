@@ -116,6 +116,7 @@ func cambiarEstado(nuevoEstado):
 			pass
 	match nuevoEstado:
 		State.DAMAGED:
+			sonidoSerGolpeado()
 			$AnimatedSprite2D.animation="damaged"
 			$AnimatedSprite2D.play()
 			$hitParticles.rotation = get_angle_to(player.position)+PI
@@ -137,6 +138,7 @@ func cambiarEstado(nuevoEstado):
 			$Timer.wait_time=2
 			$Timer.start()
 			self.velocity=(player.global_position-self.global_position).normalized()*3000
+			Audio.play_sound(preload("res://audio/otros/394434__inspectorj__bamboo-swing-b4.wav"))
 		State.IDLE:
 			$AnimatedSprite2D.animation="idle"
 			$Timer.wait_time=0.5
@@ -169,3 +171,14 @@ func _on_timer_timeout():
 			cambiarEstado(State.CARGANDO)
 		State.CARGANDO:
 			cambiarEstado(State.MOVING)
+
+
+var audioSerGolpeado = [preload("res://audio/impacts/impactPunch_heavy_000.ogg"),
+preload("res://audio/impacts/impactPunch_heavy_001.ogg"),
+preload("res://audio/impacts/impactPunch_heavy_002.ogg"),
+preload("res://audio/impacts/impactPunch_heavy_003.ogg"),
+preload("res://audio/impacts/impactPunch_heavy_004.ogg")]
+
+func sonidoSerGolpeado():
+	var indice_aleatorio = randi() % audioSerGolpeado.size()
+	Audio.play_sound(audioSerGolpeado[indice_aleatorio])
