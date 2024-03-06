@@ -1,4 +1,4 @@
-extends VFlowContainer
+extends VBoxContainer
 
 @export var gameplay_scene:PackedScene
 @export var settings_scene:PackedScene
@@ -18,4 +18,12 @@ func _on_settings_pressed():
 	get_tree().change_scene_to_packed(settings_scene)
 
 func _on_start_pressed():
-	get_tree().change_scene_to_packed(gameplay_scene)
+	Audio.play_sound(preload("res://audio/interface/select_005.ogg"))
+	$"../MenuDificultades".modulate = Color(1,1,1,0)
+	var tween=get_tree().create_tween()
+	tween.tween_property($"../MenuDificultades", "modulate", Color(1,1,1,1) , 3)
+	self.hide()
+	$"../MenuDificultades".show()
+	$"../MenuDificultades/Hbox/VBoxContainer2/Hero".grab_focus()
+#get_tree().change_scene_to_packed(gameplay_scene)
+

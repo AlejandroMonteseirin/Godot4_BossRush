@@ -63,6 +63,7 @@ func save_settings():
 	for setting in ["fullscreen", "effectVolume", "musicVolume"]:
 		config.set_value(CONFIG_SETTINGS_SECTION, setting, self[setting])
 	config.save(SETTINGS_FILE)
+	print(SETTINGS_FILE)
 
 ## val is a bool representing whether or not to toggle on fullscreen
 func set_fullscreen(val:bool):
@@ -81,6 +82,10 @@ func set_setting(setting, val, save := true):
 	if setting == "fullscreen":
 		set_fullscreen(val)
 	if setting == "musicVolume":
+		musicVolume=val
+		Audio.volume_db=(musicVolume / 100) * 80 - 40
+	if setting == "effectVolume":
+		effectVolume=val
 		Audio.volume_db=(musicVolume / 100) * 80 - 40
 	if save:
 		save_settings()

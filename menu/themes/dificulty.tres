@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cee4rg4fco7s2"]
+
+[ext_resource type="FontFile" uid="uid://c28wbqig78unj" path="res://assets/fuente/andiamo.ttf" id="1_erad3"]
+
+[resource]
+default_font = ExtResource("1_erad3")
+default_font_size = 40

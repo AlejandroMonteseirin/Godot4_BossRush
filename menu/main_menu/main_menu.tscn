@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://0268jtpuc6rp"]
+[gd_scene load_steps=10 format=3 uid="uid://0268jtpuc6rp"]
 
 [ext_resource type="Script" path="res://menu/main_menu/MenuOptions.gd" id="1_qcgqq"]
 [ext_resource type="PackedScene" uid="uid://j776gwgxqsbv" path="res://escenas/odin.tscn" id="2_lwayf"]
 [ext_resource type="PackedScene" uid="uid://rxdgdijyhrsb" path="res://menu/settings/settings.tscn" id="3_2osu0"]
+[ext_resource type="FontFile" uid="uid://c28wbqig78unj" path="res://assets/fuente/andiamo.ttf" id="4_2xdq0"]
+[ext_resource type="Theme" uid="uid://b1rv1o30x6fxl" path="res://menu/themes/theme_botones_menu.tres" id="4_c4yph"]
+[ext_resource type="Script" path="res://scripts/MenuDificultades.gd" id="6_2o1r2"]
+[ext_resource type="Theme" uid="uid://cee4rg4fco7s2" path="res://menu/themes/dificulty.tres" id="6_hwjic"]
+
+[sub_resource type="Theme" id="Theme_cnbk8"]
+default_font = ExtResource("4_2xdq0")
+default_font_size = 100
+
+[sub_resource type="Theme" id="Theme_ogpx0"]
+default_font = ExtResource("4_2xdq0")
+default_font_size = 20
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -31,6 +43,7 @@ offset_left = -960.0
 offset_right = 960.0
 offset_bottom = 300.0
 grow_horizontal = 2
+theme = SubResource("Theme_cnbk8")
 theme_type_variation = &"HeaderLarge"
 text = "Pepeyu Souls"
 horizontal_alignment = 1
@@ -46,6 +59,7 @@ offset_top = 200.0
 offset_right = 335.0
 offset_bottom = 232.0
 grow_horizontal = 2
+theme = SubResource("Theme_ogpx0")
 text = "A game by Alejandro Monteseirin"
 
 [node name="Controls" type="Label" parent="."]
@@ -75,17 +89,18 @@ grow_vertical = 2
 text = "
 "
 
-[node name="MenuOptions" type="VFlowContainer" parent="." node_paths=PackedStringArray("shortcut_context")]
+[node name="MenuOptions" type="VBoxContainer" parent="." node_paths=PackedStringArray("shortcut_context")]
 layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = -1
+anchor_left = 0.4
+anchor_right = 0.6
 anchor_bottom = 1.0
-offset_left = -25.0
-offset_right = 141.0
+offset_left = -48.5
+offset_right = 48.5
 grow_horizontal = 2
 grow_vertical = 2
 shortcut_context = NodePath("Start")
+theme_override_constants/separation = 15
 alignment = 1
 script = ExtResource("1_qcgqq")
 gameplay_scene = ExtResource("2_lwayf")
@@ -93,16 +108,100 @@ settings_scene = ExtResource("3_2osu0")
 
 [node name="Start" type="Button" parent="MenuOptions"]
 layout_mode = 2
+theme = ExtResource("4_c4yph")
 text = "Start"
 
 [node name="Settings" type="Button" parent="MenuOptions"]
 layout_mode = 2
+theme = ExtResource("4_c4yph")
 text = "Settings"
 
 [node name="Quit" type="Button" parent="MenuOptions"]
 layout_mode = 2
+theme = ExtResource("4_c4yph")
 text = "Quit"
+
+[node name="MenuDificultades" type="VBoxContainer" parent="." node_paths=PackedStringArray("shortcut_context")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_right = 0.6
+anchor_bottom = 1.0
+offset_left = -48.5
+offset_right = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+shortcut_context = NodePath("../MenuOptions/Start")
+theme_override_constants/separation = 15
+alignment = 1
+script = ExtResource("6_2o1r2")
+
+[node name="Hbox" type="HBoxContainer" parent="MenuDificultades"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuDificultades/Hbox"]
+layout_mode = 2
+
+[node name="Baby" type="Button" parent="MenuDificultades/Hbox/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_hwjic")
+text = "Baby"
+
+[node name="babytext" type="RichTextLabel" parent="MenuDificultades/Hbox/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave amp=30.0 freq=15.0 connected=1][color=green]5 lives[/color] every level
+  [rainbow freq=1.0 sat=0.3 val=0.8]Heal[/rainbow] every level
+  [color=orange]Save[/color] every level [/wave]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MenuDificultades/Hbox"]
+layout_mode = 2
+
+[node name="Hero" type="Button" parent="MenuDificultades/Hbox/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("6_hwjic")
+text = "Hero"
+
+[node name="babytext2" type="RichTextLabel" parent="MenuDificultades/Hbox/VBoxContainer2"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[tornado radius=5.0 freq=1.0 connected=1][color=green]3 lives[/color] every level
+  [rainbow freq=1.0 sat=0.3 val=0.8]Heal[/rainbow] every 3 levels
+  [color=orange]Save[/color] every 3 levels [/tornado]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MenuDificultades/Hbox"]
+layout_mode = 2
+
+[node name="legend" type="Button" parent="MenuDificultades/Hbox/VBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("6_hwjic")
+text = "Legend"
+
+[node name="babytext3" type="RichTextLabel" parent="MenuDificultades/Hbox/VBoxContainer3"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[pulse freq=1.0 color=red ease=0.5] 	3 lives
+	NO SAVE   
+[/pulse]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="back" type="Button" parent="MenuDificultades"]
+layout_mode = 2
+theme = ExtResource("6_hwjic")
+text = "Back"
 
 [connection signal="pressed" from="MenuOptions/Start" to="MenuOptions" method="_on_start_pressed"]
 [connection signal="pressed" from="MenuOptions/Settings" to="MenuOptions" method="_on_settings_pressed"]
 [connection signal="pressed" from="MenuOptions/Quit" to="MenuOptions" method="_on_quit_pressed"]
+[connection signal="pressed" from="MenuDificultades/Hbox/VBoxContainer/Baby" to="MenuDificultades" method="_on_baby_pressed"]
+[connection signal="pressed" from="MenuDificultades/Hbox/VBoxContainer2/Hero" to="MenuDificultades" method="_on_hero_pressed"]
+[connection signal="pressed" from="MenuDificultades/Hbox/VBoxContainer3/legend" to="MenuDificultades" method="_on_legend_pressed"]
+[connection signal="pressed" from="MenuDificultades/back" to="MenuDificultades" method="_on_back_pressed"]
