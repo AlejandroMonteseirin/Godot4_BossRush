@@ -1,13 +1,22 @@
 extends HSlider
 
-
+var timer =false
 func _ready():
+	timer=true
 	value= Global.musicVolume
+	timer=false
 
 
-func _on_drag_ended(value_changed):
+
+
+func _on_value_changed(value):
+	if !timer:
+		Audio.play_sound(preload("res://audio/interface/scroll_003.ogg"))
+		$"../TimerMusic".start()
+		timer=true
+
+
+func _on_timer_timeout():
+	timer=false
 	Global.set_setting("musicVolume", value)
 
-
-func _on_drag_started():
-	Audio.play_sound(preload("res://audio/interface/scroll_003.ogg"))

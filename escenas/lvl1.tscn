@@ -100,3 +100,6 @@ position = Vector2(1322, 1291)
 
 [node name="obelisk5" parent="map1" instance=ExtResource("10_u2n7x")]
 position = Vector2(1543, 601)
+
+[node name="TileMap" type="TileMap" parent="map1"]
+format = 2

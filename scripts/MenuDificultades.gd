@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-
+@export var gameplay_scene:PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -17,6 +17,8 @@ func _on_baby_pressed():
 
 func _on_hero_pressed():
 	Audio.play_sound(preload("res://audio/interface/select_005.ogg"))
+	Global.save_dificulty("hero")
+	get_tree().change_scene_to_packed(gameplay_scene)
 
 
 func _on_legend_pressed():

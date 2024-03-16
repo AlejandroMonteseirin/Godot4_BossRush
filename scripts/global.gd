@@ -34,7 +34,7 @@ func freeze_engine(slow=0.1,time=0.2):
 var effectVolume = 50
 var musicVolume = 30
 var fullscreen = false
-const SCENE_MAIN_MENU = "res://menu/main_menu/main_menu.tscn"
+
 
 
 const SETTINGS_FILE = "user://settings.cfg"
@@ -101,3 +101,26 @@ func defaultSettings():
 	set_setting('musicVolume', 50)
 	set_setting('effectVolume', 50)
 	set_setting('fullscreen', false)
+	
+	
+	
+#SAVEGAME
+var SAVE_FILE = "user://alexgame.save" 
+var lvl = 0
+var dificulty = "hero"
+
+func save_dificulty(dificulty_new):
+	dificulty=dificulty_new
+	var file = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
+	file.store_var(dificulty)
+	
+func load_dificulty():
+	if FileAccess.file_exists(SAVE_FILE):
+		var file = FileAccess.open(SAVE_FILE, FileAccess.READ)
+		dificulty = file.get_var()
+		print(dificulty)
+		
+	else:
+		print("dificulty load save ERROR")
+		dificulty = "hero"
+

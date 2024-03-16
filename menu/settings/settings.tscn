@@ -96,9 +96,15 @@ layout_mode = 2
 text = "Back"
 script = ExtResource("5_x47bl")
 
+[node name="TimerMusic" type="Timer" parent="SettingsControls"]
+one_shot = true
+
+[node name="TimerEffect" type="Timer" parent="SettingsControls"]
+one_shot = true
+
 [connection signal="toggled" from="SettingsControls/FullscreenToggle" to="SettingsControls/FullscreenToggle" method="_on_toggled"]
-[connection signal="drag_ended" from="SettingsControls/Music" to="SettingsControls/Music" method="_on_drag_ended"]
-[connection signal="drag_started" from="SettingsControls/Music" to="SettingsControls/Music" method="_on_drag_started"]
-[connection signal="drag_ended" from="SettingsControls/effects" to="SettingsControls/effects" method="_on_drag_ended"]
-[connection signal="drag_started" from="SettingsControls/effects" to="SettingsControls/effects" method="_on_drag_started"]
+[connection signal="value_changed" from="SettingsControls/Music" to="SettingsControls/Music" method="_on_value_changed"]
+[connection signal="value_changed" from="SettingsControls/effects" to="SettingsControls/effects" method="_on_value_changed"]
 [connection signal="pressed" from="SettingsControls/BackButton" to="SettingsControls/BackButton" method="_on_pressed"]
+[connection signal="timeout" from="SettingsControls/TimerMusic" to="SettingsControls/Music" method="_on_timer_timeout"]
+[connection signal="timeout" from="SettingsControls/TimerEffect" to="SettingsControls/effects" method="_on_timer_effect_timeout"]
