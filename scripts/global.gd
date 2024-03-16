@@ -4,6 +4,7 @@ var vidas=3
 
 #Value use by lvls to store global data. example in lvl 1 the number of slimes destroyed.
 var tempValue=0
+var tempValue2=0
 
 func shake_camera(tiempo,intesidad):
 	get_node("/root/odin/player/Camera2D").shake_camera(tiempo,intesidad)

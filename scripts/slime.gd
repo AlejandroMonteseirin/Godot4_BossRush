@@ -64,6 +64,7 @@ func atacado(_damage):
 		if !iniciadoCombate:
 			iniciadoCombate=true
 			Global.musica(1)
+			Global.tempValue2=1
 		if (vidas<=0):
 			if not hijo and not bebe:
 				for i in range(2):

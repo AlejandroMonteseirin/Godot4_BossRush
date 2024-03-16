@@ -13,6 +13,11 @@ func _ready():
 
 
 func _on_timer_timeout():
+	if Global.tempValue2==1:
+		$map/fire5.activate()
+		$map/fire6.activate()
+		$map/fire7.activate()
+		Audio.play_sound(preload("res://audio/otros/248116__robinhood76__05224-fireball-whoosh.wav"))
 	if Global.tempValue >= 1:
 		if $map/brights1.emitting==false:
 			$map/brights1.emitting=true
