@@ -1,21 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://ckown3jcexjo"]
+[gd_scene load_steps=18 format=3 uid="uid://ckown3jcexjo"]
 
 [ext_resource type="Texture2D" uid="uid://ceurdsb5bjweg" path="res://assets/TexturesCom_Wall_Stone3_2x2_1K_albedo.png" id="1_md2uh"]
 [ext_resource type="Script" path="res://scripts/lvl1.gd" id="1_rsdyr"]
 [ext_resource type="Texture2D" uid="uid://dq62iy2b5mclk" path="res://assets/TexturesCom_Wall_Stone3_2x2_1K_normal.png" id="2_mmpdi"]
 [ext_resource type="Texture2D" uid="uid://d2oqg3mn8gumf" path="res://assets/lava/Lava_004_COLOR.jpg" id="4_udsc0"]
 [ext_resource type="Script" path="res://scripts/pentagrama.gd" id="8_jt3mo"]
+[ext_resource type="TileSet" uid="uid://t2av4i26uwwv" path="res://assets/tilest/tileset.tres" id="8_k7jod"]
 [ext_resource type="PackedScene" uid="uid://c7b8jbhrusnek" path="res://escenas/obelisk.tscn" id="10_u2n7x"]
 [ext_resource type="Texture2D" uid="uid://rxjftkj8yg8i" path="res://textures/magic_01.png" id="12_5ru4b"]
 [ext_resource type="Texture2D" uid="uid://fluh1gj34mb4" path="res://assets/lava/Lava_005_COLOR.jpg" id="13_av26q"]
 [ext_resource type="Texture2D" uid="uid://bogtd1t14olir" path="res://assets/lava/Lava_005_NORM.jpg" id="14_e0wqu"]
 [ext_resource type="Texture2D" uid="uid://0cvkcilt0gip" path="res://assets/lava/Lava_005_DISP.png" id="15_00o1j"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_l17i7"]
-diffuse_texture = ExtResource("13_av26q")
-normal_texture = ExtResource("14_e0wqu")
-specular_texture = ExtResource("15_00o1j")
-specular_shininess = 0.25
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_gsvbv"]
 diffuse_texture = ExtResource("4_udsc0")
@@ -25,20 +20,26 @@ texture_repeat = 3
 diffuse_texture = ExtResource("1_md2uh")
 normal_texture = ExtResource("2_mmpdi")
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_l17i7"]
+diffuse_texture = ExtResource("13_av26q")
+normal_texture = ExtResource("14_e0wqu")
+specular_texture = ExtResource("15_00o1j")
+specular_shininess = 0.25
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_laov2"]
+load_path = "res://.godot/imported/TexturesCom_Wall_Stone3_2x2_1K_albedo.png-1ce91cde3c67098fa12d8da7bd54e31d.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kx3md"]
+load_path = "res://.godot/imported/TexturesCom_Wall_Stone3_2x2_1K_normal.png-b04dcd80d1c331738842b94303c53987.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5qefi"]
+diffuse_texture = SubResource("CompressedTexture2D_laov2")
+normal_texture = SubResource("CompressedTexture2D_kx3md")
+
 [node name="lvl" type="Node2D"]
 script = ExtResource("1_rsdyr")
 
 [node name="map1" type="Node" parent="."]
-
-[node name="lavaExt" type="TextureRect" parent="map1"]
-z_index = -2
-offset_left = -5000.0
-offset_top = -5000.0
-offset_right = 15000.0
-offset_bottom = 15000.0
-scale = Vector2(0.6, 0.6)
-texture = SubResource("CanvasTexture_l17i7")
-stretch_mode = 1
 
 [node name="bordeSombra" type="Polygon2D" parent="map1"]
 modulate = Color(0.454902, 0.454902, 0.454902, 1)
@@ -69,7 +70,6 @@ texture = SubResource("CanvasTexture_7wdvh")
 stretch_mode = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="map1"]
-visible = false
 collision_layer = 2
 collision_mask = 0
 
@@ -77,6 +77,7 @@ collision_mask = 0
 polygon = PackedVector2Array(42, 46, 1962, 54, 1966, 1953, 2066, 2033, 2052, -18, 32, -28)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="map1/StaticBody2D"]
+position = Vector2(-13, -7)
 polygon = PackedVector2Array(42, 46, 42, 1948, 1966, 1953, 2066, 2033, -20, 2031, 32, -28)
 
 [node name="pentagrama" type="Sprite2D" parent="map1" groups=["obelisk"]]
@@ -102,4 +103,65 @@ position = Vector2(1322, 1291)
 position = Vector2(1543, 601)
 
 [node name="TileMap" type="TileMap" parent="map1"]
+scale = Vector2(5, 5)
+tile_set = ExtResource("8_k7jod")
 format = 2
+layer_0/tile_data = PackedInt32Array(4063231, 131083, 12, 4128767, 131083, 13, 4194303, 131083, 14, 4259839, 131083, 15, 3997696, 196619, 12, 4063232, 196619, 13, 4128768, 196619, 14, 4194304, 196619, 15, 3997697, 262155, 12, 4063233, 262155, 13, 4128769, 262155, 14, 4194305, 262155, 15, 3997698, 327691, 12, 4063234, 327691, 13, 4128770, 327691, 14, 4194306, 327691, 15, 3997699, 393227, 12, 4063235, 393227, 13, 4128771, 393227, 14, 4194307, 393227, 15, 3997700, 458763, 12, 4063236, 458763, 13, 4128772, 458763, 14, 4194308, 458763, 15, 3997701, 524299, 12, 4063237, 524299, 13, 4128773, 524299, 14, 4194309, 524299, 15, 3997702, 131083, 12, 4063238, 131083, 13, 4128774, 131083, 14, 4194310, 131083, 15, 3997703, 196619, 12, 4063239, 196619, 13, 4128775, 196619, 14, 4194311, 196619, 15, 3997704, 262155, 12, 4063240, 262155, 13, 4128776, 262155, 14, 4194312, 262155, 15, 3997705, 327691, 12, 4063241, 327691, 13, 4128777, 327691, 14, 4194313, 327691, 15, 3997706, 131083, 12, 4063242, 131083, 13, 4128778, 131083, 14, 4194314, 131083, 15, 3997707, 196619, 12, 4063243, 196619, 13, 4128779, 196619, 14, 4194315, 196619, 15, 3997708, 262155, 12, 4063244, 262155, 13, 4128780, 262155, 14, 4194316, 262155, 15, 3997709, 327691, 12, 4063245, 327691, 13, 4128781, 327691, 14, 4194317, 327691, 15, 3997710, 393227, 12, 4063246, 393227, 13, 4128782, 393227, 14, 4194318, 393227, 15, 3997711, 458763, 12, 4063247, 458763, 13, 4128783, 458763, 14, 4194319, 458763, 15, 3997712, 524299, 12, 4063248, 524299, 13, 4128784, 524299, 14, 4194320, 524299, 15, 3997713, 458763, 6, 4063249, 458763, 7, 4128785, 458763, 8, 4194321, 458763, 9, 4718580, 1179659, 2, 4784116, 1179659, 3, 4849652, 1179659, 4, 4915188, 1179659, 5, 4980724, 1179659, 6, 5046260, 1179659, 7, 4325364, 1179659, 2, 4390900, 1179659, 3, 4456436, 1179659, 4, 4521972, 1179659, 5, 4587508, 1179659, 6, 4653044, 1179659, 7, 3932148, 1179659, 2, 3997684, 1179659, 3, 4063220, 1179659, 4, 4128756, 1179659, 5, 4194292, 1179659, 6, 4259828, 1179659, 7, 3407860, 1179659, 2, 3473396, 1179659, 3, 3538932, 1179659, 2, 3604468, 1179659, 3, 3670004, 1179659, 4, 3735540, 1179659, 5, 3801076, 1179659, 6, 3866612, 1179659, 7, 3342324, 1572875, 2, 3342325, 1638411, 2, 3342326, 1703947, 2, 3342327, 1769483, 2, 3342328, 1835019, 2, 3342329, 1572875, 2, 3342330, 1638411, 2, 3342331, 1703947, 2, 3342332, 1769483, 2, 3342333, 1835019, 2, 3342334, 1572875, 2, 3342335, 1638411, 2, 3276800, 1703947, 2, 3276801, 1769483, 2, 3276802, 1572875, 2, 3276803, 1638411, 2, 3276804, 1703947, 2, 3276805, 1769483, 2, 3276806, 1835019, 2, 3276807, 1900555, 2, 3604497, 1376267, 7, 3670033, 1376267, 3, 3735569, 1376267, 4, 3801105, 1376267, 5, 3866641, 1376267, 6, 3932177, 1376267, 7, 3276817, 1376267, 7, 3342353, 1376267, 3, 3407889, 1376267, 4, 3473425, 1376267, 5, 3538961, 1376267, 6, 2949137, 1376267, 2, 3014673, 1376267, 3, 3080209, 1376267, 4, 3145745, 1376267, 5, 3211281, 1376267, 6, 2490385, 1376267, 2, 2555921, 1376267, 2, 2621457, 1376267, 3, 2686993, 1376267, 4, 2752529, 1376267, 5, 2818065, 1376267, 6, 2883601, 1376267, 7, 2097169, 1376267, 4, 2162705, 1376267, 5, 2228241, 1376267, 6, 2293777, 1376267, 7, 2359313, 1376267, 6, 2424849, 1376267, 7, 1966097, 1376267, 2, 2031633, 1376267, 3, 2031624, 1179659, 3, 2097160, 1179659, 4, 2162696, 1179659, 5, 2228232, 1179659, 6, 2293768, 1179659, 7, 2359304, 1179659, 2, 1966088, 1179659, 2, 2424840, 1179659, 3, 2490376, 1179659, 4, 2555912, 1179659, 5, 2621448, 1179659, 6, 2686984, 1179659, 7, 2752520, 1179659, 2, 2818056, 1179659, 3, 2883592, 1179659, 2, 2949128, 1179659, 3, 3014664, 1179659, 4, 3080200, 1179659, 5, 3145736, 1179659, 6, 3211272, 1179659, 7, 3276808, 1048587, 8, 4063230, 589835, 2, 4128766, 589835, 3, 4194302, 589835, 4, 4259838, 589835, 5, 4325374, 589835, 6, 4390910, 589835, 7, 4456446, 589835, 3, 4521982, 589835, 4, 4587518, 589835, 5, 4653054, 589835, 6, 4718590, 589835, 7, 4784126, 589835, 3, 4849662, 589835, 4, 4915198, 589835, 5, 4980734, 589835, 6, 5046270, 589835, 7, 5111796, 655371, 8, 5111797, 720907, 8, 5111798, 786443, 8, 5111799, 851979, 8, 5111800, 917515, 8, 5111801, 655371, 8, 5111802, 720907, 8, 5111803, 786443, 8, 5111804, 851979, 8, 5111805, 917515, 8, 5111806, 983051, 8)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="map1"]
+follow_viewport_enabled = true
+follow_viewport_scale = 0.9
+scroll_base_scale = Vector2(0.1, 0.1)
+
+[node name="lavaExt" type="TextureRect" parent="map1/ParallaxBackground"]
+z_index = -2
+offset_left = -5000.0
+offset_right = 5000.0
+offset_bottom = 10000.0
+texture = SubResource("CanvasTexture_l17i7")
+stretch_mode = 1
+
+[node name="Suelo4" type="TextureRect" parent="map1"]
+z_index = -2
+offset_left = 661.0
+offset_top = 2446.0
+offset_right = 4376.0
+offset_bottom = 10371.0
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CanvasTexture_5qefi")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Suelo5" type="TextureRect" parent="map1"]
+z_index = -2
+offset_left = -946.0
+offset_top = 4029.0
+offset_right = 10804.0
+offset_bottom = 8434.0
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CanvasTexture_5qefi")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Suelo6" type="TextureRect" parent="map1"]
+z_index = -2
+offset_left = -946.0
+offset_top = 4029.0
+offset_right = 3279.0
+offset_bottom = 14789.0
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CanvasTexture_5qefi")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="suelos2" type="StaticBody2D" parent="map1"]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="map1/suelos2"]
+position = Vector2(-946, 4029)
+scale = Vector2(0.2, 0.2)
+polygon = PackedVector2Array(135, 10675, 4145, 10685, 4160, 4290, 11765, 4265, 11755, -8125, 12330, -8140, 12720, 4795, 4800, 11695, -1200, 10885)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map1/suelos2"]
+position = Vector2(-946, 4029)
+scale = Vector2(0.2, 0.2)
+polygon = PackedVector2Array(105, 4840, 130, 10835, -390, 10810, -530, -835, 7320, -870, 7380, -8165, 8130, -8165, 8115, 55, 155, 35)
