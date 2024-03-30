@@ -6,14 +6,16 @@ extends Node2D
 
 
 
-var nivelActual
+var niveles 
+var nivelActualNumero=1
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	inicializarNivel(nivel1)
-	nivelActual=nivel1
+	niveles= [nivel0,nivel1,nivel2]
+	inicializarNivel(niveles[nivelActualNumero])
+
 
 func reiniciarNivel():
-	inicializarNivel(nivelActual)
+	inicializarNivel(niveles[nivelActualNumero])
 	$player.reiniciar()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,6 +31,7 @@ func inicializarNivel(infoNivel):
 	var lvl= infoNivel.instantiate()
 	musica(0)
 	$player.global_position=Vector2(lvl.infoNivel.posicion[0],lvl.infoNivel.posicion[1])
+	$player.unlockeables=nivelActualNumero
 	self.add_child(lvl)
 
 

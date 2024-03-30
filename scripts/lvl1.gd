@@ -1,7 +1,7 @@
 extends Node
 
 var infoNivel = {"camara":"jugador",
-	"posicion": [-800,6000]}
+	"posicion": [-500,6000]}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

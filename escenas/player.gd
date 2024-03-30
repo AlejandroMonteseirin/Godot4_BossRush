@@ -26,85 +26,81 @@ var ultimoAnguloConDecimal=0
 var hit=false
 var cooldownHit=0.6
 
-enum State
-{
-  STATE_WALKING,
-  STATE_DASH,
-  STATE_ATTACK,
-  STATE_HIT,
-  STATE_RAYO,
-  STATE_DEATH
-};
-var ESTADO=State.STATE_WALKING
+
+var ESTADO=Global.State.STATE_WALKING
 
 var unlockeables = 0
 
+
+
+
 func cambiarEstado(nuevoEstado):
+
 	match ESTADO:
-		State.STATE_ATTACK:
+		Global.State.STATE_ATTACK:
 			$ataqueHitbox/Area2D.hide()
 			$ataqueHitbox/Area2D.monitoring=false
 			$ataqueHitbox.emitting=false
 			hitboxAtaque=false
-		State.STATE_DASH:
+		Global.State.STATE_DASH:
 			cooldownRodar=1
 			$GPUParticles2D2.emitting=false
-		State.STATE_RAYO:
+		Global.State.STATE_RAYO:
 			contadorRayo=0
 			$rayo.emitting=false
 			$rayo/PointLight2D.visible=false
 			
 	match nuevoEstado:
-		State.STATE_HIT:
+		Global.State.STATE_HIT:
 			Audio.play_sound(preload("res://audio/impacts/impactPlate_heavy_003.ogg"))
 			cooldownHit=0.6
 			Input.start_joy_vibration(0,0.4,0.1,0.6)
 			$AnimationPlayer.play("hit")
 			Global.shake_camera(0.3,35)
 			cambiarAnimacion(ultimoAngulo,Vector2(0,0),"hit")
-		State.STATE_ATTACK:
+		Global.State.STATE_ATTACK:
 			Input.start_joy_vibration(0,0.1,0.1,0.3)
 			cambiarAnimacion(ultimoAngulo,Vector2(0,0),"attack")
 			contadorAtaque=0
-		State.STATE_DASH:
+		Global.State.STATE_DASH:
 			$GPUParticles2D2.emitting=true
 			self.velocity=self.velocity*3
 			contadorRodar=0
-		State.STATE_RAYO:
+		Global.State.STATE_RAYO:
 			$rayo.emitting=true
 			$rayo.position=Vector2(100,0).rotated(deg_to_rad(ultimoAnguloConDecimal))
 			self.velocity=Vector2(0,0)
-		State.STATE_DEATH:
+		Global.State.STATE_DEATH:
 			cambiarAnimacion(ultimoAngulo,Vector2(0,0),"death")
-			muerte()
+			call_deferred("muerte")
 	ESTADO=nuevoEstado
 
 func _physics_process(delta):
 	procesarCooldowns(delta)
 	match ESTADO:
-		State.STATE_WALKING:
+		Global.State.STATE_WALKING:
 			var direction:Vector2 = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 			self.velocity=direction*1000
 			
 			if unlockeables>=1 and cooldownRodar<=0 and Input.is_action_just_pressed("rodar") and direction!=Vector2(0,0):
-				cambiarEstado(State.STATE_DASH)
+				cambiarEstado(Global.State.STATE_DASH)
 				return
 				
 			if Input.is_action_just_pressed("ataque") and cooldownAtaque<=0:
-				cambiarEstado(State.STATE_ATTACK)
+				cambiarEstado(Global.State.STATE_ATTACK)
 				return
 			
 			if unlockeables>=2 and Input.is_action_just_pressed("rayo"):
-				cambiarEstado(State.STATE_RAYO)
+				cambiarEstado(Global.State.STATE_RAYO)
 				return
 			moverse(direction)
-		State.STATE_DASH:
+		Global.State.STATE_DASH:
 			contadorRodar=contadorRodar+1*delta
 			moverse(Vector2(0,0))
 			if contadorRodar>0.15:
-				cambiarEstado(State.STATE_WALKING)
+				cambiarEstado(Global.State.STATE_WALKING)
 				return
-		State.STATE_ATTACK:
+		Global.State.STATE_ATTACK:
 			contadorAtaque=contadorAtaque+1*delta
 			if(contadorAtaque>0.35 and hitboxAtaque==false ):
 				sonidoAtaque()
@@ -115,15 +111,16 @@ func _physics_process(delta):
 				$ataqueHitbox.emitting=true
 				hitboxAtaque=true
 			if(contadorAtaque>0.5 and hitboxAtaque==true):
-				cambiarEstado(State.STATE_WALKING)
+				cambiarEstado(Global.State.STATE_WALKING)
 
-		State.STATE_HIT:
+		Global.State.STATE_HIT:
 			if(cooldownHit>0):		
 				cooldownHit=cooldownHit-1*delta
 			else:
-				cambiarEstado(State.STATE_WALKING)
+				cambiarEstado(Global.State.STATE_WALKING)
+
 				
-		State.STATE_RAYO:
+		Global.State.STATE_RAYO:
 			if Input.is_action_pressed("rayo"):
 
 				$rayo.process_material.scale_min=0.1+contadorRayo*0.1
@@ -148,7 +145,7 @@ func _physics_process(delta):
 					self.get_parent().add_child(relampago)
 				contadorRayo=0
 				$rayo.emitting=false
-				cambiarEstado(State.STATE_WALKING)
+				cambiarEstado(Global.State.STATE_WALKING)
 			moverse(Vector2(0,0))
 			
 	
@@ -164,7 +161,7 @@ func moverse(direction:Vector2):
 
 	var direccionAnimada=calcular_direccion(direction)
 	ultimoAngulo=direccionAnimada
-	if ESTADO==State.STATE_WALKING or ESTADO==State.STATE_DASH or ESTADO==State.STATE_RAYO:
+	if ESTADO==Global.State.STATE_WALKING or ESTADO==Global.State.STATE_DASH or ESTADO==Global.State.STATE_RAYO:
 		cambiarAnimacion(direccionAnimada,direction)
 
 	if move_and_slide(): # true if collided
@@ -176,13 +173,13 @@ func moverse(direction:Vector2):
 					self.tocado(col.get_collider().variacionVidas)
 					col.get_collider().destruir()
 func tocado(variacionVidas):
-	if ESTADO != State.STATE_HIT:
+	if ESTADO != Global.State.STATE_HIT:
 		Global.freeze_engine()
 		Global.modificarVidas(variacionVidas)
 		if Global.vidas<=0:
-			cambiarEstado(State.STATE_DEATH)
+			cambiarEstado(Global.State.STATE_DEATH)
 		else:
-			cambiarEstado(State.STATE_HIT)
+			cambiarEstado(Global.State.STATE_HIT)
 	
 func vector_a_grados(vector):
 	
@@ -267,7 +264,7 @@ func muerte():
 	
 func reiniciar():
 	cambiarAnimacion(ultimoAngulo,Vector2(0,0),"idle")
-	self.cambiarEstado(State.STATE_WALKING)
+	self.cambiarEstado(Global.State.STATE_WALKING)
 	self.set_physics_process(true)
 	$CollisionShape2D.disabled=false
 	$LightOccluder2D2.visible=true

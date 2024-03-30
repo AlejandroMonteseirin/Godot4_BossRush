@@ -210,9 +210,4 @@ script = ExtResource("16_4cpg4")
 position = Vector2(-11, 3)
 polygon = PackedVector2Array(-57, 4902, -67, 5055, -1069, 5011)
 
-[node name="Timer" type="Timer" parent="map1/detectorSprint"]
-one_shot = true
-
 [connection signal="body_entered" from="map1/detectorSprint" to="map1/detectorSprint" method="_on_body_entered"]
-[connection signal="body_exited" from="map1/detectorSprint" to="map1/detectorSprint" method="_on_body_exited"]
-[connection signal="timeout" from="map1/detectorSprint/Timer" to="map1/detectorSprint" method="_on_timer_timeout"]

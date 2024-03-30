@@ -1,5 +1,16 @@
 extends Node2D
 
+enum State
+{
+  STATE_WALKING,
+  STATE_DASH,
+  STATE_ATTACK,
+  STATE_HIT,
+  STATE_RAYO,
+  STATE_DEATH
+};
+
+
 var vidas=3
 
 #Value use by lvls to store global data. example in lvl 1 the number of slimes destroyed.
