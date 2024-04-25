@@ -28,8 +28,10 @@ color_ramp = SubResource("GradientTexture1D_wrqkt")
 process_material = ExtResource("1_x2qfd")
 texture = ExtResource("1_3ymwb")
 lifetime = 0.8
+visibility_rect = Rect2(-478.794, -536.681, 1789.59, 1143.87)
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
 position = Vector2(6, 19)
 process_material = SubResource("ParticleProcessMaterial_af71e")
 texture = ExtResource("3_aet23")
+visibility_rect = Rect2(-503.693, -689.708, 2013.53, 1216.47)

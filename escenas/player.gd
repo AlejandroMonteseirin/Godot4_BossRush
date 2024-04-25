@@ -264,7 +264,7 @@ func muerte():
 	
 func reiniciar():
 	cambiarAnimacion(ultimoAngulo,Vector2(0,0),"idle")
-	self.cambiarEstado(Global.State.STATE_WALKING)
+	self.cambiarEstado(Global.State.STATE_HIT)
 	self.set_physics_process(true)
 	$CollisionShape2D.disabled=false
 	$LightOccluder2D2.visible=true
