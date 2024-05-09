@@ -15,7 +15,6 @@ var playerIn=null
 func _on_body_entered(body):
 	if 'player' in body.name and body.ESTADO != Global.State.STATE_DASH:
 		playerIn=body
-		print("entro")
 		self._on_timer_timeout()
 
 
@@ -23,7 +22,6 @@ func _on_body_entered(body):
 
 
 func _on_body_exited(body):
-	print("salio")
 	if 'player' in body.name and playerIn!=null:
 		playerIn=null
 

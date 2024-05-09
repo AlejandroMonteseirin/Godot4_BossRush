@@ -115,7 +115,6 @@ polygon = PackedVector2Array(1, 142, 38, 104, 22, -92, 1, -124, -13, -93, -27, 1
 
 [node name="obelisk" type="RigidBody2D" groups=["obelisk"]]
 position = Vector2(960, 176)
-collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_s4jre")
 

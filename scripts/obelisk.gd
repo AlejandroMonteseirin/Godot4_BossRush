@@ -1,6 +1,7 @@
 extends RigidBody2D
 @onready var rayo = preload("res://escenas/rayo.tscn")
-var activado=false
+@export var activado=false
+@export var principal=true
 var atacable=true
 var disabled=false
 # Called when the node enters the scene tree for the first time.
@@ -9,6 +10,7 @@ func _ready():
 		var tween = create_tween()
 		tween.tween_property($PointLight2D, "energy", 5,1)
 		tween.play()
+		activar()
 
 
 
@@ -27,7 +29,8 @@ func atacado(_dano):
 		return
 	if activado:
 		morir()
-		activarResto()
+		if principal:
+			activarResto()
 	else: 
 		activar()
 		
@@ -49,10 +52,12 @@ func morir():
 	tween.tween_property($AnimatedSprite2D, "modulate", Color(0.2,0.2,0.2),2)
 	tween.parallel().tween_property($PointLight2D, "energy", 0,2)
 	tween.play()
+	if principal:
+		Global.tempValue=Global.tempValue+1
 
 
 func activar():
-	if activado:
+	if activado and principal:
 		return
 	activado=true
 	var tween = create_tween()
@@ -63,7 +68,7 @@ func activar():
 	tween2.tween_property($PointLight2D, "energy", 5,1)
 	tween2.play()
 	Global.shake_camera(0.1,100)
-	$Timer.wait_time=1.0
+	$Timer.wait_time=randf_range(0.8,1.4)
 	$Timer.start()
 
 func _on_timer_timeout():
@@ -82,4 +87,5 @@ func _on_timer_timeout():
 	tween3.tween_property($PointLight2D, "texture_scale", 2,2.9)
 	tween3.play()
 	$Timer.wait_time=3.0
+	Audio.play_sound(preload("res://audio/otros/143611__dwoboyle__weapons-synth-blast-01.wav"))
 	self.add_child(rayo.instantiate())

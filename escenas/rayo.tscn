@@ -61,6 +61,8 @@ color_ramp = SubResource("GradientTexture1D_8idah")
 
 [node name="rayo" type="RigidBody2D" groups=["proyectil"]]
 z_index = 1
+collision_layer = 2
+collision_mask = 2
 mass = 0.1
 script = ExtResource("1_p57eq")
 
@@ -79,6 +81,8 @@ texture = ExtResource("2_o1lkx")
 shape = SubResource("CircleShape2D_7oy1v")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Timer2" type="Timer" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(1, 0, 0, 1)
@@ -101,4 +105,5 @@ explosiveness = 1.0
 local_coords = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
